@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import logo from '../assets/logo.png';
+import Modal from "react-responsive-modal";
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { VscChromeClose } from 'react-icons/vsc';
+import { Button, Modals } from 'react-bootstrap';
+
 export default function Navbar() {
   const [navbarState, setNavbarState] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
   return (
     <>
       <Nav>
         <div className='brand'>
-          <div className='container'>
-            <img src={logo} alt='' />
-            BusEncode
-          </div>
           <div className='toggle'>
             {navbarState ? (
               <VscChromeClose onClick={() => setNavbarState(false)} />
@@ -21,51 +21,22 @@ export default function Navbar() {
             )}
           </div>
         </div>
-
-        <ul>
-          <li>
-            <a href='#hero'>Home</a>
-          </li>
-          <li>
-            <a href='#services'>Services</a>
-          </li>
-          <li>
-            <a href='#testimonials'>Testimonials</a>
-          </li>
-        </ul>
         <div>
-          <button className='login'>Login</button>
-          <button>Register</button>
+          <a href='#login' style={{color:"white"}}>Login/Logout</a>
+          <a href='#login' style={{color:"white"}}>Register</a>
         </div>
       </Nav>
-      <ResponsiveNav state={navbarState}>
-        <ul>
-          <li>
-            <a href='#hero' onClick={() => setNavbarState(false)}>
-              Home
-            </a>
-          </li>
-          <li>
-            <a href='#services' onClick={() => setNavbarState(false)}>
-              Services
-            </a>
-          </li>
-
-          <li>
-            <a href='#testimonials' onClick={() => setNavbarState(false)}>
-              Testimonials
-            </a>
-          </li>
-        </ul>
-      </ResponsiveNav>
     </>
   );
 }
 
 const Nav = styled.nav`
+  padding-top: 3px;
+  padding-bottom: 3px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background:linear-gradient(to right, #00147B, #050041);
   .brand {
     .container {
       cursor: pointer;
