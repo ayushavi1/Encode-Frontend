@@ -1,24 +1,40 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import './searchBuses.css';
+import axios from 'axios'
 import { Bus } from './Bus';
 
-import { useLocation } from 'react-router-dom';
+import { useLocation,Link } from 'react-router-dom';
 
-export default function Buses() {
+export default function Buses(props) {
+
+  useEffect(async() => {
+    const config = {
+        headers: {
+            'Authorization': `Bearer ${JSON.parse(localStorage.getItem('authTokens')).access}`
+        }
+    }
+    const data = await axios.post(
+        'http://localhost:8000/driver/get/buses/',
+        {place_id:props.place_id},
+        config,
+    );
+    console.log(data);
+  }, []);
+  
   const All_bus = [
     {
       _id: '618b660ca17ac455f40e10ef',
       bus_name: 'Bharat Benz A/C Sleeper(2 + 1)',
       pick_up_time: '2',
-      duration: '3.30',
+      duration: '20',
       drop_time: '5.30',
       rating: 1,
       price: 425,
       seats_available: 34,
       seat_type: 'single',
-      pickup_address: 'durgapur',
-      drop_address: 'howrah',
+      pickup_address: 'Mumbai',
+      drop_address: 'Guwahati',
       passengers: [],
       travel_name: 'JGD Travels Pvt Ltd.',
       __v: 0,
@@ -27,14 +43,14 @@ export default function Buses() {
       _id: '618b6662a17ac455f40e10f1',
       bus_name: 'Bharat Benz A/C Sleeper(2 + 2)',
       pick_up_time: '2.30',
-      duration: '3.30',
+      duration: '20',
       drop_time: '6.00',
       rating: 1.9,
       price: 525,
       seats_available: 34,
       seat_type: 'single',
-      pickup_address: 'durgapur',
-      drop_address: 'howrah',
+      pickup_address: 'Mumbai',
+      drop_address: 'Guwahati',
       passengers: [],
       travel_name: 'JGD Travels Pvt Ltd.',
       __v: 0,
@@ -43,14 +59,14 @@ export default function Buses() {
       _id: '618b67c223e97c3fcee6f2b6',
       bus_name: 'Bharat Benz A/C Sleeper(2 + 2)',
       pick_up_time: '2.30',
-      duration: '3.30',
+      duration: '20',
       drop_time: '6.00',
       rating: 1.9,
       price: 525,
       seats_available: 34,
       seat_type: 'single',
-      pickup_address: 'durgapur',
-      drop_address: 'howrah',
+      pickup_address: 'Mumbai',
+      drop_address: 'Guwahati',
       passengers: [],
       sleeper: true,
       ac: false,
@@ -68,8 +84,8 @@ export default function Buses() {
       price: 2600,
       seats_available: 34,
       seat_type: 'single',
-      pickup_address: 'mumbai',
-      drop_address: 'new delhi',
+      pickup_address: 'Mumbai',
+      drop_address: 'Guwahati',
       passengers: [],
       sleeper: false,
       ac: true,
@@ -87,8 +103,8 @@ export default function Buses() {
       price: 3000,
       seats_available: 34,
       seat_type: 'single',
-      pickup_address: 'mumbai',
-      drop_address: 'new delhi',
+      pickup_address: 'Mumbai',
+      drop_address: 'Guwahati',
       passengers: [],
       sleeper: false,
       ac: true,
@@ -106,8 +122,8 @@ export default function Buses() {
       price: 1524,
       seats_available: 34,
       seat_type: 'single',
-      pickup_address: 'bangalore',
-      drop_address: 'mumbai',
+      pickup_address: 'Mumbai',
+      drop_address: 'Guwahati',
       passengers: [],
       sleeper: false,
       ac: false,
@@ -125,8 +141,8 @@ export default function Buses() {
       price: 1524,
       seats_available: 34,
       seat_type: 'single',
-      pickup_address: 'bangalore',
-      drop_address: 'mumbai',
+      pickup_address: 'Mumbai',
+      drop_address: 'Guwahati',
       passengers: [],
       sleeper: true,
       ac: false,
@@ -144,8 +160,8 @@ export default function Buses() {
       price: 1524,
       seats_available: 34,
       seat_type: 'single',
-      pickup_address: 'bangalore',
-      drop_address: 'mumbai',
+      pickup_address: 'Mumbai',
+      drop_address: 'Guwahati',
       passengers: [],
       sleeper: true,
       ac: false,
@@ -163,8 +179,8 @@ export default function Buses() {
       price: 1524,
       seats_available: 34,
       seat_type: 'single',
-      pickup_address: 'bangalore',
-      drop_address: 'mumbai',
+      pickup_address: 'Mumbai',
+      drop_address: 'Guwahati',
       passengers: [],
       sleeper: true,
       ac: false,
@@ -182,8 +198,8 @@ export default function Buses() {
       price: 15240,
       seats_available: 34,
       seat_type: 'single',
-      pickup_address: 'bangalore',
-      drop_address: 'mumbai',
+      pickup_address: 'Mumbai',
+      drop_address: 'Guwahati',
       passengers: [],
       seater: true,
       sleeper: false,
@@ -208,8 +224,8 @@ export default function Buses() {
       price: 152400,
       seats_available: 34,
       seat_type: 'single',
-      pickup_address: 'bangalore',
-      drop_address: 'mumbai',
+      pickup_address: 'Mumbai',
+      drop_address: 'Guwahati',
       passengers: [],
       seater: true,
       sleeper: false,
@@ -233,7 +249,6 @@ export default function Buses() {
   var BUS_JS = All_bus.filter(
     (item) => from === item.pickup_address || to === item.drop_address
   );
-    console.log(BUS_JS);
   const [buses, setBuses] = useState(BUS_JS);
 
   var original = BUS_JS;

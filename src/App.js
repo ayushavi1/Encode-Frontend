@@ -41,6 +41,7 @@ function App() {
         <Routes>
             <Route exact path='/' element={<PrivateRoute/>}>
               <Route element={<Profile/>} path='/profile' exact />
+              <Route element={<Dashboard/>} path='/' exact />
               <Route element={<Dashboard/>} path='/dashboard' exact />
               <Route element={<Payment/>} path='/purchase' exact />
               <Route element={<PaymentHistory/>} path='/purchase/history' exact />
@@ -50,7 +51,7 @@ function App() {
             <Route element={<Login/>} path='/login' exact />
             <Route element={<Register/>} path='/register' exact />
             <Route element={<Landing/>} path='/landing' exact />
-            <Route element={<SearchBus/>} path='/buses' exact />
+            <Route element={<SearchBus/>} path='/buses/:place_id' exact />
             <Route element={<SelectedBus/>} path='/selectedbus' exact />
             
         </Routes>

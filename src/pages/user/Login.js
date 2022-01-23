@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { loginUser } from '../../actions/action';
 import { connect } from 'react-redux';
 import  { Navigate } from 'react-router-dom';
@@ -13,9 +14,8 @@ const Login = (props) => {
         const res = await props.loginUser({'username':username,'password':password});
         console.log("res: ",res);
         if(res.status===200)
-            navigate('/profile');
+            navigate('/dashboard');
     }
-    if(props.isAuthenticated&&!props.user.first_name) return <Navigate to='/profile'/>
     if(props.isAuthenticated) return <Navigate to='/dashboard'/>
     return  (
         <div className='Authpage'>

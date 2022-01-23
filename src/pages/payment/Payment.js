@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import { validatePayment,getPaymentHistory } from '../../actions/action';
 import { connect } from 'react-redux';
 import { Navigate } from 'react-router-dom'
+import Footer from '../../components/Footer';
 
 function loadScript(src) {
 	return new Promise((resolve) => {
@@ -22,7 +23,7 @@ const __DEV__ = document.domain === 'localhost'
 const Payment = (props) => {
 
     const [orderid,setOrderid] = useState();
-    const [finalAmount,setfinalAmount] = useState();
+    const [finalAmount,setfinalAmount] = useState(1000);
     const [name, setName] = useState('Mehul')
 
 	async function displayRazorpay() {
@@ -67,18 +68,80 @@ const Payment = (props) => {
         setfinalAmount(res.data.amount)
     }
     return (
+      <div>
         <div>
-            <h3>Purchase</h3>
-            <form onSubmit={handlePayment}>
-                <input type="text" placeholder="Enter your name" name="name"></input>
-                <input type="text" placeholder="Enter amount to pay" name="amount"></input>
-                <button type="submit">Submit</button>
+          <div
+            container
+            style={{
+              minHeight: '250px',
+              background: 'linear-gradient(to right, #00147B, #050041)',
+            }}
+          >
+            <div
+              item
+              style={{
+                textAlign: 'center',
+                color: 'white',
+                fontSize: '50px',
+                fontFamily: 'Dongle',
+                paddingTop: '20px',
+              }}
+            >
+              Payment
+            </div>
+            <div
+              item
+              style={{
+                textAlign: 'center',
+                color: '#E2E2E2',
+                fontSize: '40px',
+                fontFamily: 'Dongle',
+                paddingTop: '30px',
+                transform: 'translate(0,-45px)',
+              }}
+            >
+              To book a ride, please pay the amount!
+            </div>
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              margin: '2rem auto',
+            }}
+          >
+            <form
+              onSubmit={handlePayment}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                margin: '2rem auto',
+              }}
+            >
+              
+              <button
+                onClick={displayRazorpay}
+                style={{
+					width:'150px',
+                  borderRadius: '5px',
+                  backgroundColor: '#00147B',
+                  color: 'white',
+                  fontSize: '30px',
+                  fontFamily: 'Dongle',
+                  marginTop: '10px',
+                }}
+                type='submit'
+              >
+                Pay Now
+              </button>
             </form>
-            <button onClick={displayRazorpay}>Pay here</button>
+          </div>
 
-			
+          <Footer />
         </div>
-    )
+      </div>
+    );
 }
 
 const mapStateToProps = (state) => {

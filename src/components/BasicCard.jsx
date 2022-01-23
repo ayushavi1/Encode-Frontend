@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import styled from 'styled-components';   
-
+import { Link } from 'react-router-dom';
 const bull = (
   <Box
     component='span'
@@ -18,22 +18,29 @@ const bull = (
 
 export default function BasicCard() {
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card sx={{ minWidth: 350, mr: 30 }}>
       <CardContent>
         <Typography variant='h5' component='div'>
-          Number of seats available: 10
+          Number of seats available: 34
         </Typography>
         <br />
         <Typography variant='h5' component='div'>
-          Number of seats selected: 3
+          Number of seats selected: 1
         </Typography>
         <br />
         <Typography variant='h5' component='div'>
-          Price: 150
+          Price: 10
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size='small'>Proceed to Pay</Button>
+        <Link to='/purchase'>
+          <button
+            style={{ borderRadius: '5px', padding: '10px' }}
+            size='small'
+          >
+            Proceed to Pay
+          </button>
+        </Link>
       </CardActions>
     </Card>
   );
